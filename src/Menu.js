@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import Axios from "axios";
 import logoMenu from "./restaurant-menu.png";
-
+import Recipe from './Recipe';
 const Menu = () => {
 
     const [query, setQuery] = useState("");
-    const [results, setResults] = useState("");
+    const [recipes, setRecipes] = useState([]);
 
     const url = `https://api.spoonacular.com/recipes/complexSearch?query=${query}`;
 
     const getData = async () => {
-        const result = await Axios.get(url);
-        setResults(results);
-        console.log(result);
+        const Object = await Axios.get(url);
+        setRecipes(Object.data.results);
+        console.log(Object);
         setQuery("");
 
     };
@@ -31,17 +31,16 @@ const Menu = () => {
             <header className='headerMenu'>
                 <img src={logoMenu} alt="logo" className="image" />
                 <div className='formulario'>
-                    <form className='form' onSubmit={onSubmit}>
-                        <input type="text" placeholder='Busca tu plato ideal' autoComplete='off' onChange={onChange} value={query} />
-                        <input type="submit" value="search" />
+                    <form className='formulario' onSubmit={onSubmit}>
+                        <input className='buscador' type="text" placeholder='Busca tu plato ideal' autoComplete='off' onChange={onChange} value={query}  />
+                        <input className='botonFood' type="submit" value="search" />
                     </form>
                 </div>
             </header>
 
-            <div className='row'>
-                <div className='col-md-4 col-sm-12'>
-                    {results !== [] && results.map(result => <h2>{results.title}</h2>)}
-
+            <div className='container-fluid foodContainer'>
+                <div className='row'>
+                    {recipes !== [] && recipes.map(recipe => <Recipe recipe={recipe} />)}
                 </div>
             </div>
         </div>
