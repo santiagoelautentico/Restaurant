@@ -1,7 +1,6 @@
-import axios from "axios";
+import Axios from "axios";
 import React, { Component } from "react";
 import logo from "../src/restaurant.png";
-import Menu from "./Plato"
 import { Apiurl } from "./services/apirest"
 
 class Login extends Component {
@@ -34,7 +33,7 @@ class Login extends Component {
 
     manejadorBoton = () => {
         let url = Apiurl + "auth"
-        axios.post(url, this.state.form)
+        Axios.post(url, this.state.form)
             .then( response =>{
                 if(response.data.status === "ok"){
                     localStorage.setItem("token", response.data.result.token);

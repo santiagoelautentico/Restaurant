@@ -7,6 +7,7 @@ import {
   Link
 } from "react-router-dom";
 import Menu from './Menu';
+import Plato from './Plato';
 function App() {
   return (
     <>
@@ -14,6 +15,7 @@ function App() {
         <Switch>
           <Route path='/' exact render={props => (<Login {...props} />)}></Route>
           <Route path='/Menu' exact render={props => (<Menu {...props} />)}></Route>
+          <Route path='/Plato' exact render={props => (<Menu {...props} />)}><Plato></Plato></Route>
         </Switch>
       </Router>
     </>
